@@ -1,0 +1,169 @@
+/* Estructura base para sticky footer */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f8ff;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+  padding: 2rem;
+  margin-bottom: 2rem; 
+}
+
+.navbar {
+  background: #3b82f6;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-weather {
+  font-size: 1rem;
+}
+
+.add-btn, .filter-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.filter-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;  
+  background-color: #3b82f6;
+  padding: 1rem;
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 200px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.filter-menu.open {
+  display: flex;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.task {
+  background: #fff6c8;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  word-wrap: break-word;
+}
+
+.task h3 {
+  margin-top: 0;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #e11d48;
+}
+
+.textarea {
+  resize: vertical;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#news-section {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  margin-top: auto;
+}
+
+#news-section h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#news-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+#news-list a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+#news-list a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}

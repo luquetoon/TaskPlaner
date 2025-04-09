@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskPlanner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-title">TaskPlanner</div>
+    <div class="navbar-weather" id="weather">Loading weather...</div>
+    <button id="open-form-btn" class="add-btn">+ Add Task</button>
+    <button id="filter-btn" class="filter-btn">☰ Filters</button>
+
+    <!-- Barra de filtros que se despliega -->
+    <div id="filter-menu" class="filter-menu">
+      <button data-filter="all">All</button>
+      <button data-filter="pending">Pending</button>
+      <button data-filter="in_progress">In Progress</button>
+      <button data-filter="completed">Completed</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <form id="task-form" class="hidden">
+      <label for="title">Task Title</label>
+      <input type="text" id="title" name="title" required>
+      
+      <label for="description">Description</label>
+      <textarea id="description" name="description" class="textarea" required></textarea>
+    
+      <label for="dueDate">Due Date</label>
+      <input type="date" id="dueDate" name="dueDate" required>
+    
+      <label for="dueTime">Due Time</label>
+      <input type="time" id="dueTime" name="dueTime" required>
+    
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    
+      <button type="submit">Add Task</button>
+    </form>
+
+    <div id="task-list" class="task-grid"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+<footer id="news-section">
+    <h2>Latest News</h2>
+    <ul id="news-list"></ul>
+</footer>
+</html>
