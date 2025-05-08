@@ -8,8 +8,6 @@ const { requireRole } = require('../middlewares/roleMiddleware');
 // ** Rutas protegidas y con validación **
 
 // GET público (pero protegido con login)
-router.get('/', authMiddleware, eventController.getEvents);
-
 /**
  * @swagger
  * /events:
@@ -26,11 +24,9 @@ router.get('/', authMiddleware, eventController.getEvents);
  *               items:
  *                 $ref: '#/components/schemas/Event'
  */
-router.get('/', eventController.getEventController);
+router.get('/', authMiddleware, eventController.getEvents);
 
 // POST solo para admins
-router.post('/', authMiddleware, requireRole('admin'), createEventValidations, eventController.createEvent);
-
 /**
  * @swagger
  * /events:
@@ -51,11 +47,9 @@ router.post('/', authMiddleware, requireRole('admin'), createEventValidations, e
  *             schema:
  *               $ref: '#/components/schemas/Event'
  */
-router.post('/', createEventValidations, eventController.createEvent);
+router.post('/', authMiddleware, requireRole('admin'), createEventValidations, eventController.createEvent);
 
-// PUT solo para admins
-router.put('/:id', authMiddleware, requireRole('admin'), getEventValidations, updateEventValidations, eventController.updateEvent);
-
+// PUT solo para admin
 /**
  * @swagger
  * /events/{id}:
@@ -83,11 +77,9 @@ router.put('/:id', authMiddleware, requireRole('admin'), getEventValidations, up
  *             schema:
  *               $ref: '#/components/schemas/Event'
  */
-router.put('/:id', getEventValidations, updateEventValidations, eventController.updateEvent);
+router.put('/:id', authMiddleware, requireRole('admin'), getEventValidations, updateEventValidations, eventController.updateEvent);
 
 // DELETE solo para admins
-router.delete('/:id', authMiddleware, requireRole('admin'), getEventValidations, eventController.deleteEvent);
-
 /**
  * @swagger
  * /events/{id}:
@@ -105,6 +97,6 @@ router.delete('/:id', authMiddleware, requireRole('admin'), getEventValidations,
  *       200:
  *         description: Evento eliminado exitosamente
  */
-router.delete('/:id', getEventValidations, eventController.deleteEvent);
+router.delete('/:id', authMiddleware, requireRole('admin'), getEventValidations, eventController.deleteEvent);
 
 module.exports = router;

@@ -8,8 +8,6 @@ const { requireRole } = require('../middlewares/roleMiddleware');
 // ** Rutas protegidas y con validación **
 
 // GET público (pero protegido con login)
-router.get('/', authMiddleware, taskController.getTaskController);
-
 /**
  * @swagger
  * /tasks:
@@ -26,11 +24,10 @@ router.get('/', authMiddleware, taskController.getTaskController);
  *               items:
  *                 $ref: '#/components/schemas/Task'
  */
-router.get('/', taskController.getTaskController);
+router.get('/', authMiddleware, taskController.getTasks);
+
 
 // POST solo para usuarios autenticados
-router.post('/', authMiddleware, createTaskValidations, taskController.createTask);
-
 /**
  * @swagger
  * /tasks:
@@ -54,8 +51,6 @@ router.post('/', authMiddleware, createTaskValidations, taskController.createTas
 router.post('/', authMiddleware, createTaskValidations, taskController.createTask);
 
 // PUT solo para usuarios autenticados
-router.put('/:id', authMiddleware, getTaskValidations, updateTaskValidations, taskController.updateTask);
-
 /**
  * @swagger
  * /tasks/{id}:
@@ -86,8 +81,6 @@ router.put('/:id', authMiddleware, getTaskValidations, updateTaskValidations, ta
 router.put('/:id', authMiddleware, getTaskValidations, updateTaskValidations, taskController.updateTask);
 
 // DELETE solo para usuarios autenticados
-router.delete('/:id', authMiddleware, getTaskValidations, taskController.deleteTask);
-
 /**
  * @swagger
  * /tasks/{id}:

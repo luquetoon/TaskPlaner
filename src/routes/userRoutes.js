@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const { createUserValidations, getUserValidations, updateUserValidations } = require('../validations/userValidation');
-const { authMiddleware } = require('../middlewares/authMiddleware');
-const { requireRole } = require('../middlewares/roleMiddleware');
-const { validateResult } = require('../utils/validateResult'); // Aquí importamos validateResult
+const { requireRole } = require('../middlewares/roleMiddleware.js');
+const { authMiddleware } = require('../middlewares/authMiddleware.js');
+const { validateResult } = require('../utils/validateResult.js'); // Aquí importamos validateResult
 
 // ** Rutas protegidas y con validación **
 
 // GET solo para usuarios autenticados (pero protegido)
-router.get('/', authMiddleware, userController.getUserController);
-
 /**
  * @swagger
  * /users:
@@ -27,11 +25,10 @@ router.get('/', authMiddleware, userController.getUserController);
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-router.get('/', authMiddleware, userController.getUserController);
+router.get('/', authMiddleware, userController.getUsers);
+
 
 // POST solo para admins
-router.post('/', authMiddleware, requireRole('admin'), createUserValidations, validateResult, userController.createUser);
-
 /**
  * @swagger
  * /users:
@@ -55,8 +52,6 @@ router.post('/', authMiddleware, requireRole('admin'), createUserValidations, va
 router.post('/', authMiddleware, requireRole('admin'), createUserValidations, validateResult, userController.createUser);
 
 // PUT solo para admins
-router.put('/:id', authMiddleware, requireRole('admin'), getUserValidations, updateUserValidations, validateResult, userController.updateUser);
-
 /**
  * @swagger
  * /users/{id}:
@@ -87,8 +82,6 @@ router.put('/:id', authMiddleware, requireRole('admin'), getUserValidations, upd
 router.put('/:id', authMiddleware, requireRole('admin'), getUserValidations, updateUserValidations, validateResult, userController.updateUser);
 
 // DELETE solo para admins
-router.delete('/:id', authMiddleware, requireRole('admin'), getUserValidations, validateResult, userController.deleteUser);
-
 /**
  * @swagger
  * /users/{id}:
